@@ -2,6 +2,9 @@
 
 extern PCIE_CONG_SPACE_LENGTH_FLAG, PCIEXBA, MCHBA;
 
+// POST4.c
+void InitStackInCache();
+
 enum PCIEXBAR {
     _64MB = 4,
     _128MB = 2,
@@ -49,5 +52,6 @@ void Init_HPET_MMIO_and_Compare_Register(void){
     if ( HIBYTE(BIOS_STORAGE) == 0xFF ){ // If set some flag? Or check default value?
         __outbyte(RST_CNT, 6);           // Reset CPU
     }
-    // JUMP to POST4
+    // POST4.c
+    InitStackInCache();
 };

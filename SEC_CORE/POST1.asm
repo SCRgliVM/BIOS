@@ -1,5 +1,5 @@
 #include "SEC_CORE.h"
-extern GDTAddr, FarPOST2jmp
+extern GdtDesc, FarProtectedModejmp
 org 0FFFFF8EBh
 use16
 POST1: 
@@ -9,7 +9,7 @@ POST1:
     mov al, 1
     out POST_PORT, al
 
-    mov esi, GDTAddr
+    mov esi, GdtDesc
     o32 lgdt [cs:si]    ; Load gdt
  
     mov eax, cr0        ; Enable Protected Mode & Set Monitor x87 FPU
@@ -27,5 +27,5 @@ POST1:
     mov gs, ax
     mov ss, ax
 
-    mov esi, FarPOST2jmp
+    mov esi, FarProtectedModejmp
     jmp dword far [cs:si]

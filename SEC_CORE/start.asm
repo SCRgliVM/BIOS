@@ -15,8 +15,10 @@ entry:
     in al, dx
     cmp al, 4
     jnz short POST1
-    ; IF RST_CNT == 4 { ; Maybe Reset?
-    mov dx, RST_CNT
-    mov al, 6
-    out dx, al
+    ; IF CPU will reset {
+        ; THEN reset system (maybe bus\pch\dram\etc.)
+        mov dx, RST_CNT
+        mov al, 6
+        out dx, al
     ; }
+    ; here POST1 code
